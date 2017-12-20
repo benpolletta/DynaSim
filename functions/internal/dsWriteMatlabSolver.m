@@ -302,24 +302,10 @@ if ~isempty(model.fixed_variables)
   fprintf(fid,'\n%% ------------------------------------------------------------\n');
   fprintf(fid,'%% Fixed variables:\n');
   fprintf(fid,'%% ------------------------------------------------------------\n');
-  
+
   % 2.2 set random seed
-<<<<<<< HEAD
-  fprintf(fid,'%% seed the random number generator\n');
-  fprintf(fid,'%% seed the random number generator\n');
-  if options.save_parameters_flag
-    fprintf(fid,'%s(%srandom_seed);\n',rng_function,parameter_prefix);
-  else
-    if ischar(options.random_seed)
-      fprintf(fid,'%s(''%s'');\n',rng_function,options.random_seed);
-    elseif isnumeric(options.random_seed)
-      fprintf(fid,'%s(%g);\n',rng_function,options.random_seed);
-    end
-  end
-=======
   setup_randomseed(options,fid,rng_function,parameter_prefix)
->>>>>>> 01c6b1a60623924e0e15469309ee9bc2343e0b6b
-  
+
   names=fieldnames(model.fixed_variables);
   expressions=struct2cell(model.fixed_variables);
   for i=1:length(names)
