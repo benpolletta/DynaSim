@@ -385,9 +385,9 @@ for iFn = 1:nResultFn
       simInd = simInds(iFile);
       
       % store result
-      if ~options.as_cell && isstruct(thisFileContents.result) && isfield(thisFileContents.result,'time')
+      if ~options.as_cell && isstruct(thisFileContents.result) % && isfield(thisFileContents.result,'time')
         % dynasim type structure to store as struct array
-        thisFnResults(simInd) = thisFileContents.result;
+        thisFnResults{simInd} = thisFileContents.result;
       else
         if iscell(thisFileContents.result) && length(thisFileContents.result) == 1
           % if single cell result, store as cell array cell
@@ -451,7 +451,11 @@ for iFn = 1:nResultFn
   end
   
   % store results
-  results.(thisLabel) = thisFnResults;
+  if ~options.as_cell && sum(cellfun(@isstruct, thisFnResults)) == length(thisFnResults)
+    results.(thisLabel) = cell2mat(thisFnResults);
+  else
+    results.(thisLabel) = thisFnResults;
+  end
   clear thisFnResults
 end % fn
 

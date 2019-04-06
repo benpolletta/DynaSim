@@ -304,7 +304,7 @@ dsPlot(data,'plot_type','power');
 % How to: set 'cluster_flag' to 1
 % Requirement: you must be logged on to a cluster that recognizes 'qsub'
 
-if 0
+if 1
   % Execute the following cluster examples from a login node
 
   % Run three simulations in parallel jobs and save the simulated data

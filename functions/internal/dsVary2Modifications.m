@@ -46,11 +46,10 @@ function modifications_set = dsVary2Modifications(vary, model_or_spec)
 %             vary_values(:, :, 2) = [-85 -65; -90 -70]
 %   vary={'(E,I)','(EK1,EK2)',vary_values},
 %
+%   vary={'(E,I)','(EK1,EK2)',[-80 -60]};
 %   % This sets modifications:
 %   %     * E_EK1, E_EK2, I_EK1, I_EK2 = -80
 %   %     * E_EK1, E_EK2, I_EK1, I_EK2 = -60
-%   vary={'(E,I)','(EK1,EK2)',[-80 -60]};
-%
 % 
 %   vary={'(E,I)','(EK1,EK2)',[-80 -60; -85 -65]};
 %   % This sets modifications:
@@ -71,7 +70,6 @@ function modifications_set = dsVary2Modifications(vary, model_or_spec)
 %     celldisp(mod_set)
 %   % Take home message: X (rows) of vary_values are individual simulations; Z (height) is populations.
 % 
-%
 %         clear vary_values
 %         vary_values(:, :, 1) = [-75 -55; -80 -60];
 %         vary_values(:, :, 2) = [-85 -65; -90 -70];
