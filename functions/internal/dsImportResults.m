@@ -365,7 +365,11 @@ for iFn = 1:nResultFn
   [simInds, sortedFileOrder] = sort(simInds);
   thisFnFiles = thisFnFiles(sortedFileOrder);
   
-  thisFnResults = cell(num_sims, 1);
+%   if options.as_cell
+      thisFnResults = cell(num_sims, 1);
+%   else
+%       thisFnResults(num_sims, 1) = struct();
+%   end
   
   for iFile = 1:nFiles
     thisFilePath = thisFnFiles{iFile};
@@ -451,8 +455,13 @@ for iFn = 1:nResultFn
   end
   
   % store results
-  if ~options.as_cell && sum(cellfun(@isstruct, thisFnResults)) == length(thisFnResults)
-    results.(thisLabel) = cell2mat(thisFnResults);
+  if ~options.as_cell % cell2mat(thisFnResults);
+    if sum(cellfun(@isstruct, thisFnResults)) == length(thisFnResults)
+        results.(thisLabel) = [thisFnResults{:}];
+    else
+        structIndex = cellfun(@isstruct, thisFnResults);
+        results.(thisLabel)(structIndex) = [thisFnResults{:}];
+    end
   else
     results.(thisLabel) = thisFnResults;
   end
